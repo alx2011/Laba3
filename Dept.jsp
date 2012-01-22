@@ -18,15 +18,15 @@
 <td><a href="ShowDept?sortfield=dname&orderby=asc" >dname</a></td>
 <td><a href="ShowDept?sortfield=loc&orderby=asc" >loc</a></td>
 </tr>
-<%  for(Dept dept : list) {%>
+<c:forEach var="d" items="${datalist}" > 
+
 	<tr>
-	<td><%= dept.getDeptno() %></td>
-	<td><%= dept.getDname() %></td>	
-	<td><%= dept.getLoc() %></td>
-	<td> <a href="EditDept?id=<%= dept.getDeptno() %>"  >Edit</a></td>
-	<td> <a href="DeleteDept?id=<%= dept.getDeptno() %>" >Delete</a></td>
+	<td>${d.deptno}</td>
+	<td>${d.dname}</td>	
+	<td>${d.loc}</td>
+	<td> <a href="EditDept?id=${d.deptno}"  >Edit</a></td>
+	<td> <a href="DeleteDept?id=${d.deptno}" >Delete</a></td>
 	</tr>  
-<%  }
-%>
+</c:forEach>
 </table>
 <a href="AddDept"  >Add new dept type</a></td>

@@ -12,8 +12,18 @@ public final class Dept_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems;
+
   public Object getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -63,39 +73,3 @@ public final class Dept_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<td><a href=\"ShowDept?sortfield=dname&orderby=asc\" >dname</a></td>\n");
       out.write("<td><a href=\"ShowDept?sortfield=loc&orderby=asc\" >loc</a></td>\n");
       out.write("</tr>\n");
-  for(Dept dept : list) {
-      out.write("\n");
-      out.write("\t<tr>\n");
-      out.write("\t<td>");
-      out.print( dept.getDeptno() );
-      out.write("</td>\n");
-      out.write("\t<td>");
-      out.print( dept.getDname() );
-      out.write("</td>\t\n");
-      out.write("\t<td>");
-      out.print( dept.getLoc() );
-      out.write("</td>\n");
-      out.write("\t<td> <a href=\"EditDept?id=");
-      out.print( dept.getDeptno() );
-      out.write("\"  >Edit</a></td>\n");
-      out.write("\t<td> <a href=\"DeleteDept?id=");
-      out.print( dept.getDeptno() );
-      out.write("\" >Delete</a></td>\n");
-      out.write("\t</tr>  \n");
-  }
-
-      out.write("\n");
-      out.write("</table>\n");
-      out.write("<a href=\"AddDept\"  >Add new dept type</a></td>");
-    } catch (Throwable t) {
-      if (!(t instanceof SkipPageException)){
-        out = _jspx_out;
-        if (out != null && out.getBufferSize() != 0)
-          out.clearBuffer();
-        if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
-      }
-    } finally {
-      if (_jspxFactory != null) _jspxFactory.releasePageContext(_jspx_page_context);
-    }
-  }
-}
