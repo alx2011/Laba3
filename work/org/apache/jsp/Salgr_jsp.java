@@ -12,8 +12,18 @@ public final class Salgr_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems;
+
   public Object getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -46,13 +56,15 @@ public final class Salgr_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "Menu.jsp", out, true);
+      out.write("\n");
       out.write("\n");
       out.write("<h1> IT'S Salgrade JSP</h1>\n");
       out.write("\n");
  ArrayList<Salgrade> list = (ArrayList<Salgrade>) request.getAttribute("datalist");
       out.write("<br>\n");
-      out.write("<form action=\"showsalgrade\">\n");
+      out.write("<form action=\"ShowSalgrade\">\n");
       out.write("<input type=\"hidden\" value=\"ShowSalgrade\" name=\"action\"/>\n");
       out.write("<input type=\"text\" name=\"search\"/>\n");
       out.write("<input type=\"submit\" value=\"Search\" />\n");
@@ -63,39 +75,3 @@ public final class Salgr_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<td><a href=\"ShowSalgrade?sortfield=minsal&orderby=asc\" >minsal</a></td>\n");
       out.write("<td><a href=\"ShowSalgrade?sortfield=hisal&orderby=asc\" >hisal</a></td>\n");
       out.write("</tr>\n");
-  for(Salgrade salgr : list) {
-      out.write("\n");
-      out.write("\t<tr>\n");
-      out.write("\t<td>");
-      out.print( salgr.getGrade() );
-      out.write("</td>\n");
-      out.write("\t<td>");
-      out.print( salgr.getMinsal() );
-      out.write("</td>\t\n");
-      out.write("\t<td>");
-      out.print( salgr.getHisal() );
-      out.write("</td>\n");
-      out.write("\t<td> <a href=\"EditSalgrade?id=");
-      out.print( salgr.getGrade() );
-      out.write("\" >Edit</a></td>\n");
-      out.write("\t<td> <a href=\"DeleteSalgrade?id=");
-      out.print( salgr.getGrade() );
-      out.write("\" >Delete</a></td>\n");
-      out.write("\t</tr>  \n");
-  }
-
-      out.write("\n");
-      out.write("</table>\n");
-      out.write("<a href=\"AddSalgrade\" >Add new salgrade</a></td>");
-    } catch (Throwable t) {
-      if (!(t instanceof SkipPageException)){
-        out = _jspx_out;
-        if (out != null && out.getBufferSize() != 0)
-          out.clearBuffer();
-        if (_jspx_page_context != null) _jspx_page_context.handlePageException(t);
-      }
-    } finally {
-      if (_jspxFactory != null) _jspxFactory.releasePageContext(_jspx_page_context);
-    }
-  }
-}
