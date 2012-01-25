@@ -3,11 +3,11 @@
 <%@ page import ="chikalov.controller.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.Date"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Menu.jsp" flush="true"/>
 
 <h1> IT'S Emp JSP</h1>
 
-<% ArrayList<Emp> list = (ArrayList<Emp>) request.getAttribute("datalist");%><br>
 <form action= "ShowEmp" >
 <input type="hidden" value="showemp" name="action"/>
 <input type="text" name="search"/>
@@ -26,22 +26,22 @@
 <td><a href="ShowEmp?sortfield=dname&orderby=asc" >dname</a></td>
 <td><a href="ShowEmp?sortfield=loc&orderby=asc" >loc</a></td>
 </tr>
-<%  for(Emp emp : list) {%>
+<c:forEach var="e" items="${datalist}" > 
 	<tr>
-	<td><%= emp.getEmpno() %></td>
-	<td><%= emp.getEname() %></td>	
-	<td><%= emp.getJob() %></td>
-	<td><%= emp.getMgr() %></td>
-	<td><%= emp.getHiredate() %></td>	
-	<td><%= emp.getSal() %></td>
-	<td><%= emp.getComm() %></td>
-	<td><%= emp.getDeptno() %></td>
-	<td><%= emp.getDept().getDname() %></td>
-	<td><%= emp.getDept().getLoc() %></td>
-	<td> <a href="EditEmp?id=<%= emp.getEmpno() %>" >Edit</a></td>
-	<td> <a href="DeleteEmp?id=<%= emp.getEmpno() %>" >Delete</a></td>
+	<td>${e.empno}</td>
+	<td>${e.ename}</td>	
+	<td>${e.job}</td>
+	<td>${e.mgr}</td>
+	<td>${e.hiredate}</td>	
+	<td>${e.sal}</td>
+	<td>${e.comm}</td>
+	<td>${e.deptno}</td>
+	<td>${e.dept.dname}</td>
+	<td>${e.dept.loc}</td>
+	<td> <a href="EditEmp?id=${e.empno}" >Edit</a></td>
+	<td> <a href="DeleteEmp?id=${e.empno}" >Delete</a></td>
 	</tr>  
-<%  }
-%>
+</c:forEach>
+
 </table>
 <a href="AddEmp" >Add new Employer</a></td>

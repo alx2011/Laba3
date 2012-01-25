@@ -18,10 +18,15 @@
 <td><a href="ShowDept?sortfield=dname&orderby=asc" >dname</a></td>
 <td><a href="ShowDept?sortfield=loc&orderby=asc" >loc</a></td>
 </tr>
-<c:forEach var="i" begin="1" end="10" step="1">
-      <c:out value="${i}" />
+<c:forEach var="d" items="${datalist}" > 
 
-      <br />
-    </c:forEach>
+	<tr>
+	<td>${d.deptno}</td>
+	<td>${d.dname}</td>	
+	<td>${d.loc}</td>
+	<td> <a href="EditDept?id=${d.deptno}"  >Edit</a></td>
+	<td> <a href="DeleteDept?id=${d.deptno}" >Delete</a></td>
+	</tr>  
+</c:forEach>
 </table>
 <a href="AddDept"  >Add new dept type</a></td>

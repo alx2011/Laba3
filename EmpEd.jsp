@@ -3,33 +3,32 @@
 <%@ page import ="chikalov.controller.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.Date"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Menu.jsp" flush="true"/>
-<% Emp emp= (Emp) request.getAttribute("dataobj"); %>
-<% ArrayList<Emp> mgrlist = (ArrayList<Emp>) request.getAttribute("mgrlist");%>
-<% ArrayList<Dept> deptlist = (ArrayList<Dept>) request.getAttribute("deptlist");%>
-<h1> Edit <%= emp.getEname() %></h1>
+
+<h1> Edit ${dataobj.ename}</h1>
 
 <form method="post" action="UpdateEmp">
   <fieldset>
     <div class="form-item">
       <label for="parameter-name">Emp name(*):</label>
-      <input id="parameter-name" name="ename" type="text" value="<%=emp.getEname()%>"/>
+      <input id="parameter-name" name="ename" type="text" value="${dataobj.ename}"/>
     </div>
     <div class="form-item">
       <label for="parameter-name">Job (*)</label>
-      <input id="parameter-name" name="job" type="text" value="<%=emp.getJob()%>"/>
+      <input id="parameter-name" name="job" type="text" value="${dataobj.job}"/>
     </div>  
     <div class="form-item">
       <label for="parameter-name">Mgr:</label>
       <select name="mgr" size="1">
-    <%  for(Emp mgr : mgrlist) {
-    		if (mgr.getEmpno()!= emp.getMgr()) { %>      
-				<option value="<%= mgr.getEmpno() %>"> <%= mgr.getEname() %></option>
-			<%} else {  %>
-				<option selected="selected" value="<%= mgr.getEmpno() %>"> <%= mgr.getEname() %> </option>
-	<% 		}
-		} %>
-		
+   <c:forEach var="m" items="${mgrlist}" > 
+   		 <c:if test="${dataobj.mgr != m.empno}">    		      
+			<option value="${m.empno}"> ${m.ename}</option>
+		 </c:if>
+		 <c:if test="${dataobj.mgr == m.empno}">    		      
+			<option selected="selected" value="${m.empno}"> ${m.ename} </option>
+		 </c:if>
+	</c:forEach>
 	  </select>
     </div>
     <div class="form-item">
@@ -46,20 +45,18 @@
     </div>  
     <div class="form-item">
       <label for="parameter-name">Dept:</label>
-      <select name="deptno" size="1">
-    <%  for(Dept dept : deptlist) {
-    		if (dept.getDeptno()!= emp.getDeptno()) { %>      
-				<option value="<%= dept.getDeptno() %>"> <%= dept.getDname() %></option>
-			<%} else {  %>
-				<option selected="selected" value="<%= dept.getDeptno() %>"> <%= dept.getDname() %> </option>
-	<% 		}
-		} %>
-		
+      <select name="deptno" size="1">       
+    <c:forEach var="d" items="${deptlist}" >
+    	<c:if test="${d.deptno != dataobj.deptno}">    	    
+				<option value="${d.deptno}"> ${d.dname}</option>
+		</c:if>
+		<c:if test="${d.deptno == dataobj.deptno}">  
+				<option selected="selected" value="${d.deptno}"> ${d.dname} </option>
+		</c:if>
+	</c:forEach>		
 	  </select>
-    </div>
-    
-    
-    <input type="hidden" value="<%= emp.getEmpno() %>" name="id"/>
+    </div>    
+    <input type="hidden" value="${dataobj.empno}" name="id"/>
     <input type="hidden" value="updateemp" name="action"/>
     <input type="submit" value="Save"  />    
   </fieldset>

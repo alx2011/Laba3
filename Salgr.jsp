@@ -7,7 +7,7 @@
 
 <h1> IT'S Salgrade JSP</h1>
 
-<% ArrayList<Salgrade> list = (ArrayList<Salgrade>) request.getAttribute("datalist");%><br>
+
 <form action="ShowSalgrade">
 <input type="hidden" value="ShowSalgrade" name="action"/>
 <input type="text" name="search"/>
@@ -24,7 +24,8 @@
 	<td>${y.grade}</td>
 	<td>${y.minsal}</td>	
 	<td>${y.hisal}</td>	
-	<td>${y}</td>	
+	<td> <a href="EditSalgrade?id=${y.grade}" >Edit</a></td>
+	<td> <a href="DeleteSalgrade?id=${y.grade}" >Delete</a></td>
 	</tr>  
 </c:forEach>
 	

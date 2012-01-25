@@ -2,12 +2,11 @@
 <%@ page import ="chikalov.model.*"%>
 <%@ page import ="chikalov.controller.*"%>
 <%@page import  ="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="Menu.jsp" flush="true"/>
-<% ArrayList<Emp> mgrlist = (ArrayList<Emp>) request.getAttribute("mgrlist");%>
-<% ArrayList<Dept> deptlist = (ArrayList<Dept>) request.getAttribute("deptlist");%>
+
 <h1> Create new Emp</h1>
 
-<script type="text/javascript" src="js/winscript.js"></script>
 <form method="post" action="CreateEmp">
   <fieldset>
     <div class="form-item">
@@ -21,9 +20,9 @@
     <div class="form-item">
       <label for="parameter-name">Mgr():</label>
       <select name="mgr" size="1">
-    <%  for(Emp mgr : mgrlist) { %>
-    	<option value="<%= mgr.getEmpno() %>"> <%= mgr.getEname() %></option>			
-	<%	} %>		
+    <c:forEach var="m" items="${mgrlist}" > 
+    	<option value="${m.empno}"> ${m.ename}</option>			
+	</c:forEach>		
 	  </select>
     </div>
     <div class="form-item">
@@ -41,9 +40,9 @@
     <div class="form-item">
       <label for="parameter-name">Dept</label>
       <select name="deptno" size="1">
-    <%  for(Dept dept : deptlist) { %>
-    	<option value="<%= dept.getDeptno() %>"> <%= dept.getDname() %></option>			
-	<%	} %>		
+    <c:forEach var="d" items="${deptlist}" >    
+    	<option value="${d.deptno}"> ${d.dname} </option>			
+	</c:forEach>		
 	  </select>
     </div>    
     <input type="hidden" value="createemp" name="action"/>
